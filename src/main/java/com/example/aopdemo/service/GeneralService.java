@@ -11,7 +11,7 @@ public class GeneralService {
 
     public void runGeneralService(){
 
-        LOG.info("********** GeneralService | runGeneralService is called **********");
+        LOG.info("GeneralService | runGeneralService is called");
         throw new GeneralNotFoundException("Exception in generalService!");
     }
 }

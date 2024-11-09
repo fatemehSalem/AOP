@@ -16,7 +16,7 @@ public class GeneralController {
     private final Logger LOG  =  LoggerFactory.getLogger(getClass());
     @PostMapping
     private void getGeneral(){
-        LOG.info("********** In general Controller **********");
+        LOG.info("In general Controller");
         generalService.runGeneralService();
     }
 }
