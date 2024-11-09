@@ -1,13 +1,10 @@
 package com.example.aopdemo.AOP;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
 @Component
@@ -26,5 +23,12 @@ public class GeneralAspect {
     @After(value="execution(* com.example.aopdemo.service.GeneralService.*(..))")
     public void afterAdvice(JoinPoint joinPoint){
         LOG.info("********** GeneralServiceAspect  | After GeneralService method got called");
+    }
+    @AfterThrowing(pointcut = "execution(* com.example.aopdemo.service.GeneralService.*(..))", throwing = "ex")
+    public void logAfterThrowingServiceLayer(JoinPoint joinPoint, Throwable ex) {
+        // Log the exception message
+        LOG.error("Exception in {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName(), ex.getCause() != null ? ex.getCause() : "NULL");
+
     }
 }
